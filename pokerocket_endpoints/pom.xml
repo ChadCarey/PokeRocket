@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.chad.portfolio</groupId>
+    <artifactId>pokerocket</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>PokeRocket</name>
+    <description>Pokemon tools by Team Rocket</description>
+
+
+    <modules>
+        <!-- <module>beans</module>
+        <module>bl</module> -->
+        <module>web</module> <!--I Only -->
+    </modules>
+
+    <properties>
+        <skipTests>true</skipTests>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <version.jboss.bom>1.0.7.Final</version.jboss.bom>
+        <version.jboss.as>7.2.0.Final</version.jboss.as>
+
+        <version.hibernate.jpamodelgen>4.3.11.Final</version.hibernate.jpamodelgen>
+
+        <version.surefire.plugin>2.10</version.surefire.plugin>
+        <version.war.plugin>2.1.1</version.war.plugin>
+        <version.codhaus.build.helper.plugin>1.5</version.codhaus.build.helper.plugin>
+        <version.codhaus.jaxb2.plugin>2.2</version.codhaus.jaxb2.plugin>
+
+        <version.apache.jexl>2.1.1</version.apache.jexl>
+
+        <version.swagger>1.3.0</version.swagger>
+        <cxf-version>3.0.2</cxf-version>
+        <version.maven-surefire-plugin>2.15</version.maven-surefire-plugin>
+        <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
+        <maven-resources-plugin-version>2.6</maven-resources-plugin-version>
+        <build-helper-maven-plugin-version>1.9.1</build-helper-maven-plugin-version>
+
+    </properties>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
+
+    <dependencyManagement>
+    </dependencyManagement>
+
+    <repositories>
+
+        <repository>
+            <id>MavenCentral</id>
+            <name>Maven Repository</name>
+            <url>https://repo2.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+</project>

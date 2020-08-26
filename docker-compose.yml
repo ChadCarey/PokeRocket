@@ -41,6 +41,7 @@ services:
       restart: always
 
    pokerocket_adminer:
+      container_name: pokerocket_adminer
       image: adminer
       restart: always
       depends_on:
@@ -61,13 +62,15 @@ services:
          rocketnet:
       depends_on:
          - pokerocket_db
-      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-      #    - "4447"
-      # ports: # Publish to host os
-      #    - "127.0.0.1:4447:4447"
+      expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+         - "8080"
+      ports: # Publish to host os
+         - "8081:8080"
+         #    - "127.0.0.1:4447:4447"
       volumes:
          - ./pokerocket_endpoints:/mnt/pokerocket_endpoints
-      command: bash
+         - ${HOME}/.m2:/root/.m2
+      command: /mnt/pokerocket_endpoints/entrypoint.sh
 
 
    pokerocket_automation:
@@ -92,7 +95,8 @@ services:
       #    - "127.0.0.1:9999:9999"
       volumes:
          - ./pokerocket_automation:/mnt/pokerocket_automation
-      command: bash
+         - ${HOME}/.m2:/root/.m2
+      command: /mnt/pokerocket_automation/entrypoint.sh
 
 
    pokerocket_test:
@@ -112,7 +116,7 @@ services:
          - pokerocket_endpoints
       volumes:
          - ./pokerocket_test:/mnt/host/pokerocket_test
-      command: bash
+      command: /mnt/host/pokerocket_test/run.sh
 
 
 networks:
