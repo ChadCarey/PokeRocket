@@ -1,93 +1,6 @@
 version: "3.7"
 
 services:
-   pokerocket_test:
-      image: ashfox/python3
-      container_name: pokerocket_test
-      # env_file:
-      #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_test.env
-      networks:
-         rocketnet:
-      expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-         - "4447"
-         - "8080"
-         - "9990"
-         - "9999"
-      ports: # Publish to host os
-         - "127.0.0.1:4447:4447"
-         - "127.0.0.1:8080:8080"
-         - "127.0.0.1:9990:9990"
-         - "127.0.0.1:9999:9999"
-      volumes:
-         - ./pokerocket_test:/mnt/host/pokerocket_test
-      command: bash /mnt/host/pokerocket_test/run.sh
-
-   # pokerocket_endpoints:
-   #    image: ashfox/openjdk11
-   #    container_name: pokerocket_endpoints
-   #    # env_file:
-   #    #    # Contains environment variables needed to access cert databases
-   #    #    - ${HOME}/.pokerocket/pokerocket_endpoints.env
-   #    networks:
-   #       rocketnet:
-   #    expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-   #       - "4447"
-   #       - "8080"
-   #       - "9990"
-   #       - "9999"
-   #    ports: # Publish to host os
-   #       - "127.0.0.1:4447:4447"
-   #       - "127.0.0.1:8080:8080"
-   #       - "127.0.0.1:9990:9990"
-   #       - "127.0.0.1:9999:9999"
-   #    volumes:
-   #       - ./pokerocket_endpoints:/mnt/pokerocket_endpoints
-   #    command: bash /mnt/pokerocket_endpoints/run.sh
-
-   # pokerocket_db:
-   #    image: ashfox/mysql
-   #    container_name: pokerocket_db
-   #    # env_file:
-   #    #    # Contains environment variables needed to access cert databases
-   #    #    - ${HOME}/.pokerocket/pokerocket_db.env
-   #    networks:
-   #       rocketnet:
-   #    expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-   #       - "4447"
-   #       - "8080"
-   #       - "9990"
-   #       - "9999"
-   #    ports: # Publish to host os
-   #       - "127.0.0.1:4447:4447"
-   #       - "127.0.0.1:8080:8080"
-   #       - "127.0.0.1:9990:9990"
-   #       - "127.0.0.1:9999:9999"
-   #    volumes:
-   #       - ./pokerocket_db:/mnt/pokerocket_db
-   #    command: bash /mnt/pokerocket_db/run.sh
-
-   # pokerocket_automation:
-   #    image: ashfox/openjdk11
-   #    container_name: pokerocket_automation
-   #    # env_file:
-   #    #    # Contains environment variables needed to access cert databases
-   #    #    - ${HOME}/.pokerocket/pokerocket_automation.env
-   #    networks:
-   #       rocketnet:
-   #    expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-   #       - "4447"
-   #       - "8080"
-   #       - "9990"
-   #       - "9999"
-   #    ports: # Publish to host os
-   #       - "127.0.0.1:4447:4447"
-   #       - "127.0.0.1:8080:8080"
-   #       - "127.0.0.1:9990:9990"
-   #       - "127.0.0.1:9999:9999"
-   #    volumes:
-   #       - ./pokerocket_automation:/mnt/pokerocket_automation
-   #    command: bash /mnt/pokerocket_automation/run.sh
 
    pokerocket_flask:
       image: ashfox/python3
@@ -108,6 +21,98 @@ services:
          - ./pokerocket_flask:/mnt/host/pokerocket_flask
       command: flask run --host=0.0.0.0
 
+   pokerocket_db:
+      image: mysql:8.0.21
+      container_name: pokerocket_db
+      env_file:
+         # Contains environment variables needed to access cert databases
+         - ${HOME}/.pokerocket/pokerocket_db.env
+      networks:
+         rocketnet:
+      environment:
+         - MYSQL_DATABASE=pokerocketdb
+      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+      #    - "4447"
+      # ports: # Publish to host os
+      #    - "127.0.0.1:4447:4447"
+      volumes:
+         - ./pokerocket_db:/mnt/pokerocket_db
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+
+   pokerocket_adminer:
+      image: adminer
+      restart: always
+      depends_on:
+         - pokerocket_db
+      networks:
+         rocketnet:
+      ports:
+         - 8080:8080
+
+
+   pokerocket_endpoints:
+      image: ashfox/openjdk11
+      container_name: pokerocket_endpoints
+      # env_file:
+      #    # Contains environment variables needed to access cert databases
+      #    - ${HOME}/.pokerocket/pokerocket_endpoints.env
+      networks:
+         rocketnet:
+      depends_on:
+         - pokerocket_db
+      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+      #    - "4447"
+      # ports: # Publish to host os
+      #    - "127.0.0.1:4447:4447"
+      volumes:
+         - ./pokerocket_endpoints:/mnt/pokerocket_endpoints
+      command: bash
+
+
+   pokerocket_automation:
+      image: ashfox/openjdk11
+      container_name: pokerocket_automation
+      # env_file:
+      #    # Contains environment variables needed to access cert databases
+      #    - ${HOME}/.pokerocket/pokerocket_automation.env
+      networks:
+         rocketnet:
+      depends_on:
+         - pokerocket_endpoints
+      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+      #    - "4447"
+      #    - "8080"
+      #    - "9990"
+      #    - "9999"
+      # ports: # Publish to host os
+      #    - "127.0.0.1:4447:4447"
+      #    - "127.0.0.1:8080:8080"
+      #    - "127.0.0.1:9990:9990"
+      #    - "127.0.0.1:9999:9999"
+      volumes:
+         - ./pokerocket_automation:/mnt/pokerocket_automation
+      command: bash
+
+
+   pokerocket_test:
+      image: ashfox/python3
+      container_name: pokerocket_test
+      # env_file:
+      #    # Contains environment variables needed to access cert databases
+      #    - ${HOME}/.pokerocket/pokerocket_test.env
+      networks:
+         rocketnet:
+      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+      #    - "4447"
+      # ports: # Publish to host os
+      #    - "5000:5000"
+      depends_on:
+         - pokerocket_flask
+         - pokerocket_endpoints
+      volumes:
+         - ./pokerocket_test:/mnt/host/pokerocket_test
+      command: bash
 
 
 networks:
