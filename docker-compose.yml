@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
    pokerocket_flask:
-      image: ashfox/python3
+      build: ./docker/python3
       container_name: pokerocket_flask
       # env_file:
       #    # Contains environment variables needed to access cert databases
@@ -52,7 +52,7 @@ services:
 
 
    pokerocket_endpoints:
-      image: ashfox/openjdk11
+      build: ./docker/openjdk11
       container_name: pokerocket_endpoints
       # env_file:
       #    # Contains environment variables needed to access cert databases
@@ -71,7 +71,7 @@ services:
 
 
    pokerocket_automation:
-      image: ashfox/openjdk11
+      build: ./docker/openjdk11
       container_name: pokerocket_automation
       # env_file:
       #    # Contains environment variables needed to access cert databases
@@ -96,7 +96,7 @@ services:
 
 
    pokerocket_test:
-      image: ashfox/python3
+      build: ./docker/python3
       container_name: pokerocket_test
       # env_file:
       #    # Contains environment variables needed to access cert databases
