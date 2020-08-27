@@ -2,14 +2,14 @@ version: "3.7"
 
 services:
 
-   pokerocket_flask:
+   pokerocket_endpoints:
       build: ./docker/python3
-      container_name: pokerocket_flask
+      container_name: pokerocket_endpoints
       # env_file:
       #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_flask.env
+      #    - ${HOME}/.pokerocket/pokerocket_endpoints.env
       environment:
-         - FLASK_APP=/mnt/host/pokerocket_flask/run.py
+         - FLASK_APP=/mnt/host/pokerocket_endpoints/run.py
       networks:
          rocketnet:
       expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
@@ -17,9 +17,12 @@ services:
       ports: # Publish to host os
          # - "127.0.0.1:4447:4447"
          - "5000:5000"
+      depends_on:
+         - pokerocket_db
       volumes:
-         - ./pokerocket_flask:/mnt/host/pokerocket_flask
+         - ./pokerocket_endpoints:/mnt/host/pokerocket_endpoints
       command: flask run --host=0.0.0.0
+
 
    pokerocket_db:
       image: mysql:8.0.21
@@ -36,9 +39,10 @@ services:
       # ports: # Publish to host os
       #    - "127.0.0.1:4447:4447"
       volumes:
-         - ./pokerocket_db:/mnt/pokerocket_db
+         - ./pokerocket_db:/mnt/host/pokerocket_db
       command: --default-authentication-plugin=mysql_native_password
       restart: always
+
 
    pokerocket_adminer:
       container_name: pokerocket_adminer
@@ -52,71 +56,23 @@ services:
          - 8080:8080
 
 
-   pokerocket_endpoints:
-      build: ./docker/openjdk11
-      container_name: pokerocket_endpoints
-      # env_file:
-      #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_endpoints.env
-      networks:
-         rocketnet:
-      depends_on:
-         - pokerocket_db
-      expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-         - "8080"
-      ports: # Publish to host os
-         - "8081:8080"
-         #    - "127.0.0.1:4447:4447"
-      volumes:
-         - ./pokerocket_endpoints:/mnt/pokerocket_endpoints
-         - ${HOME}/.m2:/root/.m2
-      command: /mnt/pokerocket_endpoints/entrypoint.sh
-
-
    pokerocket_automation:
       build: ./docker/openjdk11
       container_name: pokerocket_automation
       # env_file:
       #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_automation.env
+      #    - ${HOME}/.pokerocket/pokerocket_wildfly.env
       networks:
          rocketnet:
       depends_on:
          - pokerocket_endpoints
-      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-      #    - "4447"
-      #    - "8080"
-      #    - "9990"
-      #    - "9999"
-      # ports: # Publish to host os
-      #    - "127.0.0.1:4447:4447"
-      #    - "127.0.0.1:8080:8080"
-      #    - "127.0.0.1:9990:9990"
-      #    - "127.0.0.1:9999:9999"
+      expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
+         - "8080"
+      ports: # Publish to host os
+         - "8081:8080"
       volumes:
-         - ./pokerocket_automation:/mnt/pokerocket_automation
-         - ${HOME}/.m2:/root/.m2
-      command: /mnt/pokerocket_automation/entrypoint.sh
-
-
-   pokerocket_test:
-      build: ./docker/python3
-      container_name: pokerocket_test
-      # env_file:
-      #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_test.env
-      networks:
-         rocketnet:
-      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-      #    - "4447"
-      # ports: # Publish to host os
-      #    - "5000:5000"
-      depends_on:
-         - pokerocket_flask
-         - pokerocket_endpoints
-      volumes:
-         - ./pokerocket_test:/mnt/host/pokerocket_test
-      command: /mnt/host/pokerocket_test/run.sh
+         - ./pokerocket_automation:/mnt/host/pokerocket_automation
+      command: bash /mnt/host/pokerocket_automation/run.sh
 
 
 networks:

@@ -1,0 +1,18 @@
+<suite name="suite">
+    <test name="integration">
+<!--        <parameter name="atsUrl" value="http://localhost:8080"/>-->
+<!--        <parameter name="username" value="events/eventsmgr"/>-->
+<!--        <parameter name="password" value="WRONG PASSWORD"/>-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="integration" />-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+<!--            <class name="com.chad.portfolio.pokerocket.integration.TestPokeRocketEndpoints"/>-->
+<!--            <class name="com.chad.portfolio.pokerocket.camel.TestEndpointFactory"/>-->
+            <!-- <class name="com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.TestPokeApiProxy"/>
+            <class name="com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.TestPokeApiAdapter"/> -->
+        </classes>
+    </test>
+</suite>
