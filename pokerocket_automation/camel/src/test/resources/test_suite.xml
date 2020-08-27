@@ -1,7 +1,6 @@
 <suite name="suite">
     <test name="integration">
 <!--        <parameter name="atsUrl" value="http://localhost:8080"/>-->
-<!--        <parameter name="username" value="events/eventsmgr"/>-->
 <!--        <parameter name="password" value="WRONG PASSWORD"/>-->
 <!--        <groups>-->
 <!--            <run>-->
