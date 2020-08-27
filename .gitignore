@@ -1,1 +1,7 @@
 **/__pycache__/ 
+*.iml 
+**/.idea/
+
+**/.classpath
+**/.settings/
+**/target/
