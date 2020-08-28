@@ -5,9 +5,8 @@ services:
    pokerocket_endpoints:
       build: ./docker/python3
       container_name: pokerocket_endpoints
-      # env_file:
-      #    # Contains environment variables needed to access cert databases
-      #    - ${HOME}/.pokerocket/pokerocket_endpoints.env
+      env_file:
+         - ${HOME}/.pokerocket/pokerocket_db.env
       environment:
          - FLASK_APP=/mnt/host/pokerocket_endpoints/run.py
       networks:
@@ -21,14 +20,13 @@ services:
          - pokerocket_db
       volumes:
          - ./pokerocket_endpoints:/mnt/host/pokerocket_endpoints
-      command: flask run --host=0.0.0.0
+      command: bash /mnt/host/pokerocket_endpoints/entrypoint.sh
 
 
    pokerocket_db:
       image: mysql:8.0.21
       container_name: pokerocket_db
       env_file:
-         # Contains environment variables needed to access cert databases
          - ${HOME}/.pokerocket/pokerocket_db.env
       networks:
          rocketnet:
@@ -60,7 +58,6 @@ services:
       build: ./docker/openjdk11
       container_name: pokerocket_automation
       # env_file:
-      #    # Contains environment variables needed to access cert databases
       #    - ${HOME}/.pokerocket/pokerocket_wildfly.env
       networks:
          rocketnet:
@@ -72,7 +69,7 @@ services:
          - "8081:8080"
       volumes:
          - ./pokerocket_automation:/mnt/host/pokerocket_automation
-      command: bash /mnt/host/pokerocket_automation/run.sh
+      command: bash /mnt/host/pokerocket_automation/entrypoint.sh
 
 
 networks:

@@ -15,9 +15,6 @@ public class Pokemon {
     private Integer specialDefense;
     private Integer speed;
 
-    private Integer hunger;
-    private Integer age;
-
     public Integer getId() {
         return id;
     }

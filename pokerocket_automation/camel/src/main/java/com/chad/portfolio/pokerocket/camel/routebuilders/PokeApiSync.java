@@ -34,7 +34,7 @@ public class PokeApiSync implements RoutesBuilder {
             public void configure() throws Exception {
 
                 SystemProperties properties = SystemProperties.getInstance();
-                String onFailToEndpoint = EndpointFactory.ActiveMq(RouteConstants.EVENT_FAIL_QUEUE);
+//                String onFailToEndpoint = EndpointFactory.ActiveMq(RouteConstants.EVENT_FAIL_QUEUE);
 
                 String timerEndpoint = EndpointFactory.SimpleTimer(
                         1,1,0
