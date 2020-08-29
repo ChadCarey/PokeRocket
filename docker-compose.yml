@@ -9,6 +9,8 @@ services:
          - ${HOME}/.pokerocket/pokerocket_db.env
       environment:
          - FLASK_APP=/mnt/host/pokerocket_endpoints/run.py
+         - MYSQL_HOST=pokerocket_db
+         - MYSQL_PORT=3306
       networks:
          rocketnet:
       expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.

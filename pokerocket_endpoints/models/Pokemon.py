@@ -1,5 +1,5 @@
-from database_config import Base
 from sqlalchemy import Column, Integer, String
+from models import Base
 
 class Pokemon(Base):
     __tablename__ = 'pokemon'
