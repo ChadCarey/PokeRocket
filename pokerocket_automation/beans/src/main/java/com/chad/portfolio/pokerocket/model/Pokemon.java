@@ -1,18 +1,32 @@
 package com.chad.portfolio.pokerocket.model;
 
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Pokemon {
+    @JsonProperty
     private Integer id;
+    @JsonProperty
+    private Integer pokedexId;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private Integer height;
-    private Map<String, String> sprites;
+    @JsonProperty
+    private String sprites;
+    @JsonProperty
     private Integer weight;
+    @JsonProperty
     private Integer hp;
+    @JsonProperty
     private Integer attack;
+    @JsonProperty
     private Integer defense;
+    @JsonProperty
     private Integer specialAttack;
+    @JsonProperty
     private Integer specialDefense;
+    @JsonProperty
     private Integer speed;
 
     public Integer getId() {
@@ -21,6 +35,14 @@ public class Pokemon {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getPokedexId() {
+        return pokedexId;
+    }
+
+    public void setPokedexId(Integer pokedexId) {
+        this.pokedexId = pokedexId;
     }
 
     public String getName() {
@@ -39,11 +61,11 @@ public class Pokemon {
         this.height = height;
     }
 
-    public Map<String, String> getSprites() {
+    public String getSprites() {
         return sprites;
     }
 
-    public void setSprites(Map<String, String> sprites) {
+    public void setSprites(String sprites) {
         this.sprites = sprites;
     }
 
@@ -103,25 +125,13 @@ public class Pokemon {
         this.speed = speed;
     }
 
-    public Integer getHunger() {
-        return hunger;
-    }
-
-    public void setHunger(Integer hunger) {
-        this.hunger = hunger;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-
     public Pokemon id(Integer id) {
         this.id = id;
+        return this;
+    }
+
+    public Pokemon pokedexId(Integer id) {
+        this.pokedexId = id;
         return this;
     }
 
@@ -172,16 +182,6 @@ public class Pokemon {
 
     public Pokemon speed(Integer speed) {
         this.speed = speed;
-        return this;
-    }
-
-    public Pokemon hunger(Integer hunger) {
-        this.hunger = hunger;
-        return this;
-    }
-
-    public Pokemon age(Integer age) {
-        this.age = age;
         return this;
     }
 

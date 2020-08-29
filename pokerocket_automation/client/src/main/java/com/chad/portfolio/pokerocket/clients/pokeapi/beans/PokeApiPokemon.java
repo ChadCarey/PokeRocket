@@ -1,4 +1,4 @@
-package com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.beans;
+package com.chad.portfolio.pokerocket.clients.pokeapi.beans;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

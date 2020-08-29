@@ -20,9 +20,14 @@ def addPokemon():
 @page.route('/pokemon', methods=['GET'])
 def getAllPokemon():
     pokeJson = PokerocketAdapters.as_json(pokemonService.getAllPokemon())
-    return Response(pokeJson, status=200)
+    return Response(pokeJson, status=200, content_type="application/json")
 
 
 @page.route('/pokemon/<path:id>', methods=['GET'])
 def getPokemon(id):
-    return PokerocketAdapters.as_json(pokemonService.getPokemon(id))
+    return Response(PokerocketAdapters.as_json(pokemonService.getPokemon(id)), 200, content_type="application/json")
+
+
+@page.route('/pokedex/<path:id>', methods=['GET'])
+def getPokemonByPokedexId(id):
+    return Response(PokerocketAdapters.as_json(pokemonService.getPokemonByPokedexId(id)), 200, content_type="application/json")

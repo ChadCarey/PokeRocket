@@ -1,4 +1,4 @@
-package com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi;
+package com.chad.portfolio.pokerocket.clients.pokeapi;
 
 import org.testng.annotations.Test;
 

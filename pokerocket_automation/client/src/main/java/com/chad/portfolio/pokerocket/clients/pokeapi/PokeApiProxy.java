@@ -1,6 +1,6 @@
-package com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi;
+package com.chad.portfolio.pokerocket.clients.pokeapi;
 
-import com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.beans.PokeApiPokemon;
+import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiPokemon;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
