@@ -16,7 +16,6 @@ services:
       expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
          - "5000"
       ports: # Publish to host os
-         # - "127.0.0.1:4447:4447"
          - "5000:5000"
       depends_on:
          - pokerocket_db
@@ -34,10 +33,6 @@ services:
          rocketnet:
       environment:
          - MYSQL_DATABASE=pokerocketdb
-      # expose: #Expose ports without publishing them to the host machine - they’ll only be accessible to containers on the same network.
-      #    - "4447"
-      # ports: # Publish to host os
-      #    - "127.0.0.1:4447:4447"
       volumes:
          - ./pokerocket_db:/mnt/host/pokerocket_db
       command: --default-authentication-plugin=mysql_native_password
@@ -59,8 +54,8 @@ services:
    pokerocket_automation:
       build: ./docker/openjdk11
       container_name: pokerocket_automation
-      # env_file:
-      #    - ${HOME}/.pokerocket/pokerocket_wildfly.env
+      environment:
+         - POKEROCKET_ENDPOINTS=pokerocket_endpoints
       networks:
          rocketnet:
       depends_on:
