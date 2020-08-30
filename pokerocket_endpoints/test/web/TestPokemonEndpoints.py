@@ -89,10 +89,23 @@ class TestPokemonEndpoints(unittest.TestCase):
         self.assertEqual(res.headers['Content-Type'], "application/json")
 
         jdata = res.json()
-        print(jdata)
+
         self.assertIsNotNone(jdata, jdata)
 
         self.assertEqual(jdata.get('pokedexId', None), self.NULLIMON_POKEDEX_ID)
+
+
+
+    def test_getPokemonByPokedexIdUnknownShouldReturnNone(self):
+        url = self.GET_POKEMON_BY_POKEDEX_URL.format(id=999)
+        res = requests.get(url)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/json")
+
+        jdata = res.json()
+
+        self.assertIsNone(jdata, jdata)
 
 
 

@@ -13,10 +13,10 @@
 
 
     <modules>
-        <module>beans</module> <!-- I & E -->
-        <module>client</module> <!-- I & E -->
-<!--        <module>bl</module> &lt;!&ndash; I Only &ndash;&gt;-->
-        <module>camel</module> <!--I Only -->
+        <module>beans</module>
+        <module>client</module>
+       <module>bl</module>
+        <module>camel</module>
     </modules>
 
     <properties>

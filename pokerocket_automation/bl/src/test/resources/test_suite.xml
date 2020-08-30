@@ -1,0 +1,7 @@
+<suite name="suite">
+    <test name="integration">
+        <classes>
+            <class name="com.chad.portfolio.pokerocket.TestPokeApiSync"/> -->
+        </classes>
+    </test>
+</suite>

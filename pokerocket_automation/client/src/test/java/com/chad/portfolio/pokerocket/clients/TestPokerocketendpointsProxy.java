@@ -1,12 +1,8 @@
 package com.chad.portfolio.pokerocket.clients;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import com.chad.portfolio.pokerocket.clients.docker.DockerDnsResolver;
-import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxy;
-import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxyFactory;
-import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiPokemon;
 import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxy;
 import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxyFactory;
 import com.chad.portfolio.pokerocket.model.Pokemon;
@@ -14,11 +10,7 @@ import com.chad.portfolio.pokerocket.model.Pokemon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
-import jdk.internal.jline.internal.Log;
 
 public class TestPokerocketendpointsProxy {
 

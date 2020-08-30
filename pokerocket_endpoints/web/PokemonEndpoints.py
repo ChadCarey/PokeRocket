@@ -13,7 +13,7 @@ def addPokemon():
     jdata = request.get_json()
     poke = Pokemon(**jdata)
     id = pokemonService.addPokemon(poke)
-    return Response(json.dumps({"id": id}), status=200, content_type="application/json")
+    return Response(json.dumps(id), status=200, content_type="application/json")
 
 
 @page.route('/pokemon', methods=['GET'])

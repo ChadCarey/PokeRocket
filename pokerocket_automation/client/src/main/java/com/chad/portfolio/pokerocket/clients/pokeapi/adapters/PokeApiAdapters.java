@@ -49,9 +49,11 @@ public class PokeApiAdapters {
 
             ObjectMapper mapper = new ObjectMapper();
             pokemon
-                    .pokedexId(pokeApiPokemon.getId())
-                    .height(pokeApiPokemon.getHeight())
-                    .sprites(mapper.writeValueAsString(sprites))
+                .pokedexId(pokeApiPokemon.getId())
+                .height(pokeApiPokemon.getHeight())
+                .sprites(mapper.writeValueAsString(sprites))
+                .name(pokeApiPokemon.getName())
+                .weight(pokeApiPokemon.getWeight())
             ;
 
             return pokemon;

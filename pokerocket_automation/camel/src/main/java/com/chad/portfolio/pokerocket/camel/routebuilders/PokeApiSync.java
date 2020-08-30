@@ -63,10 +63,7 @@ public class PokeApiSync implements RoutesBuilder {
                        @Override
                        public void process(Exchange exchange) throws Exception {
                             // todo: get next pokemon id
-                            PokeApiPokemon pokeApiPokemon = pokeApiProxy.getPokemonById(1);
-                            Pokemon pokemon = PokeApiAdapters.FromPokeApi(pokeApiPokemon);
-                            Integer dbId = pokeRocketEndpointsProxy.addPokemon(pokemon);
-                            log.info("added pokemon with dbId: "+dbId);
+
                        }
                    })
                     .end();
