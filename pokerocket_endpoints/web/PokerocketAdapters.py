@@ -10,7 +10,7 @@ def as_dict(sqlalchemyObject):
         for x in sqlalchemyObject:
             out.append( as_dict(x) )
 
-        return {"list": out }
+        return out
 
     else:
         return {c.name: getattr(sqlalchemyObject, c.name) for c in sqlalchemyObject.__table__.columns}

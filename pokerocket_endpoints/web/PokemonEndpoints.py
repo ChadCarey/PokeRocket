@@ -8,13 +8,12 @@ page = Blueprint('page', __name__, template_folder='templates')
 pokemonService = PokemonService()
 
 
-
 @page.route('/pokemon', methods=['POST'])
 def addPokemon():
     jdata = request.get_json()
     poke = Pokemon(**jdata)
     id = pokemonService.addPokemon(poke)
-    return Response(json.dumps({"id": id}), status=200)
+    return Response(json.dumps({"id": id}), status=200, content_type="application/json")
 
 
 @page.route('/pokemon', methods=['GET'])
