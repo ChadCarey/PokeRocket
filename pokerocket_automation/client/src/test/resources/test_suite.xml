@@ -8,7 +8,11 @@
 <!--            </run>-->
 <!--        </groups>-->
         <classes>
+            <!-- IO -->
             <class name="com.chad.portfolio.pokerocket.clients.TestPokeApiProxy"/>
+            <class name="com.chad.portfolio.pokerocket.clients.TestPokerocketendpointsProxy"/>
+            <!-- Non IO -->
+            <class name="com.chad.portfolio.pokerocket.clients.TestPokeApiAdapter"/>
         </classes>
     </test>
 </suite>

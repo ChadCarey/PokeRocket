@@ -3,6 +3,7 @@ package com.chad.portfolio.pokerocket.clients;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import com.chad.portfolio.pokerocket.clients.docker.DockerDnsResolver;
 import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxy;
 import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxyFactory;
 import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiPokemon;
@@ -27,13 +28,12 @@ public class TestPokerocketendpointsProxy {
 
     private String url;
     private final static Integer BULBASAUR = 1;
+    private DnsResolver dnsResolver = new DockerDnsResolver();
 
     public TestPokerocketendpointsProxy() {
         try {
-            InetAddress ip = InetAddress.getByName("pokerocket_endpoints");
-            String ipStr = ip.getHostAddress();
-            log.info("Got address:" + ipStr);
-            this.url = "http://"+ ipStr+":"+port;
+            String ip = dnsResolver.getIpFromAlias("pokerocket_endpoints");
+            this.url = "http://"+ ip+":"+port;
         } catch (UnknownHostException e) {
             log.info("unable to get pokerocket_endpoints ip");
         }

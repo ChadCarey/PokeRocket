@@ -17,5 +17,7 @@ class Pokemon(Base):
     specialDefense = Column(Integer, nullable=False)
     speed = Column(Integer, nullable=False)
 
+    # TODO: add last updated
+
     def __repr__(self):
         return str(self.__dict__)

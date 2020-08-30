@@ -3,8 +3,10 @@ package com.chad.portfolio.pokerocket.clients.pokeapi.adapters;
 import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiPokemon;
 import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiStat;
 import com.chad.portfolio.pokerocket.model.Pokemon;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,16 +41,17 @@ public class PokeApiAdapters {
             }
 
             Map<String, String> sprites = new HashMap<>();
-            // Map<String, ?> pokeApiSprites = pokeApiPokemon.getSprites();
+            // Map<String, Map<String,String> > pokeApiSprites = pokeApiPokemon.getSprites();
             // for(String key : pokeApiSprites.keySet()) {
-            //     Optional.ofNullable(pokeApiSprites.get(key))
-            //             .ifPresent(spriteUrl -> sprites.put(key, (String)spriteUrl));
+            //     Optional.ofNullable( pokeApiSprites.get(key) )
+            //             .ifPresent(spriteUrl -> sprites.put(key, spriteUrl.toString() ));
             // }
 
+            ObjectMapper mapper = new ObjectMapper();
             pokemon
                     .pokedexId(pokeApiPokemon.getId())
                     .height(pokeApiPokemon.getHeight())
-                    .sprites(sprites)
+                    .sprites(mapper.writeValueAsString(sprites))
             ;
 
             return pokemon;

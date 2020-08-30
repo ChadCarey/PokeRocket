@@ -145,7 +145,7 @@ public class Pokemon {
         return this;
     }
 
-    public Pokemon sprites(Map<String,String> sprites) {
+    public Pokemon sprites(String sprites) {
         this.sprites = sprites;
         return this;
     }

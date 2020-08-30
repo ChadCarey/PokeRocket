@@ -15,8 +15,8 @@ public class PokeApiPokemon {
     private String name;
     @JsonProperty
     private Integer height;
-    @JsonProperty
-    private Map<String, ?> sprites;
+    // @JsonProperty
+    // private Map<String, Map<String,String> > sprites;
     @JsonProperty
     private Integer weight;
     @JsonProperty
@@ -46,13 +46,13 @@ public class PokeApiPokemon {
         this.height = height;
     }
 
-    public Map<String, ?> getSprites() {
-        return sprites;
-    }
+    // public Map<String, Map<String,String> > getSprites() {
+    //     return sprites;
+    // }
 
-    public void setSprites(Map<String, ?> sprites) {
-        this.sprites = sprites;
-    }
+    // public void setSprites(Map<String, Map<String,String> > sprites) {
+    //     this.sprites = sprites;
+    // }
 
     public Integer getWeight() {
         return weight;
