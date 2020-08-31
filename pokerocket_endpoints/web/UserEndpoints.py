@@ -11,7 +11,7 @@ userService = UserService()
 def addUser():
     jdata = request.get_json()
     user = User(**jdata)
-    id = UserService.addUser(user)
+    id = userService.addUser(user)
     return Response(json.dumps({"id": id}), status=200)
 
 

@@ -1,11 +1,13 @@
 from models import session
 from models.User import User
+from random import randint
 
 
 class UserService():
 
     def addUser(self, newUser):
         try:
+            newUser.salt = randint(0, 10000000)
             session.add(newUser)
             session.commit()
             return newUser.id
