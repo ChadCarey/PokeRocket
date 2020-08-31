@@ -15,7 +15,7 @@
     <modules>
         <module>beans</module>
         <module>client</module>
-       <module>bl</module>
+        <module>bl</module>
         <module>camel</module>
     </modules>
 

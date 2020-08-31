@@ -37,6 +37,7 @@ public class PokeApiSync {
         return dbId;
     }
 
+
     private Integer addPokemon(PokeApiPokemon pokeApiPokemon) {
         Integer newPokemonId = null;
         try {
@@ -49,6 +50,7 @@ public class PokeApiSync {
         }
         return newPokemonId;
     }
+
 
     private Integer updatePokemon(PokeApiPokemon pokeApiPokemon) {
         // TODO: implement!

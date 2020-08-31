@@ -2,43 +2,42 @@ package com.chad.portfolio.pokerocket.camel.routebuilders;
 
 //import com.chad.portfolio.pokerocket.model.Pokemon;
 
-import com.chad.portfolio.pokerocket.clients.pokeapi.adapters.PokeApiAdapters;
-import com.chad.portfolio.pokerocket.clients.pokeapi.beans.PokeApiPokemon;
-import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxy;
-import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxyFactory;
+import com.chad.portfolio.pokerocket.PokeApiSync;
 import com.chad.portfolio.pokerocket.camel.factories.EndpointFactory;
-import com.chad.portfolio.pokerocket.camel.routebuilders.constants.RouteConstants;
 import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxy;
 import com.chad.portfolio.pokerocket.clients.pokeapi.PokeApiProxyFactory;
-import com.chad.portfolio.pokerocket.model.Pokemon;
+import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxy;
+import com.chad.portfolio.pokerocket.clients.pokerocketendpoints.PokeRocketEndpointsProxyFactory;
+import com.chad.portfolio.pokerocket.impl.StatefullNextPokemonResolver;
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PokeApiSync implements RoutesBuilder {
+public class PokeApiSyncRoutes implements RoutesBuilder {
 
-    private static Logger log = LoggerFactory.getLogger(PokeApiSync.class);
+    private static Logger log = LoggerFactory.getLogger(PokeApiSyncRoutes.class);
 
     private final static String pokeApiUrl = "https://pokeapi.co/api/v2";
     private final static String pokerocketEndpointsUrl = "http://172.19.0.3:5000";
+
+    private PokeApiSync pokeSync;
     private PokeApiProxy pokeApiProxy;
     private PokeRocketEndpointsProxy pokeRocketEndpointsProxy;
 
-    public PokeApiSync() {
+    public PokeApiSyncRoutes() {
         pokeApiProxy = PokeApiProxyFactory.Create(pokeApiUrl);
         pokeRocketEndpointsProxy = PokeRocketEndpointsProxyFactory.Create(pokerocketEndpointsUrl);
+        this.pokeSync = new PokeApiSync(new StatefullNextPokemonResolver(), pokeApiProxy, pokeRocketEndpointsProxy);
     }
 
     @Override
     public void addRoutesToCamelContext(CamelContext camelContext) throws Exception {
-        camelContext.addRoutes(newPokeApiSyncRoute());
+        camelContext.addRoutes(newPokeApiSyncRoutesRoute());
     }
 
-    private RouteBuilder newPokeApiSyncRoute() {
+    private RouteBuilder newPokeApiSyncRoutesRoute() {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
@@ -47,7 +46,7 @@ public class PokeApiSync implements RoutesBuilder {
             //    String onFailToEndpoint = EndpointFactory.SedaPublishQueue(RouteConstants.EVENT_FAIL_QUEUE);
 
                 String timerEndpoint = EndpointFactory.SimpleTimer(
-                        1,1,1
+                        10000,1,10
                 );
 //                       properties.getPokeApiPollPeriod(),
 //                       properties.getPokeApiPollDelay(),
@@ -57,16 +56,10 @@ public class PokeApiSync implements RoutesBuilder {
 //                         .bean(ExchangeMessageAdapters.class, "eventMessageExchangeToEventSubscriptionFail").marshal(DataFormats.EVENT_FAIL_FORMAT)
 //                         .to(onFailToEndpoint);
 
-                  from(timerEndpoint)
-                  .log("Running timer")
-                   .process(new Processor() {
-                       @Override
-                       public void process(Exchange exchange) throws Exception {
-                            // todo: get next pokemon id
-
-                       }
-                   })
-                    .end();
+                from(timerEndpoint)
+                    .log("Running timer")
+                    .process(exchange -> pokeSync.syncNext())
+                .end();
             }
         };
     }
