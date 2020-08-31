@@ -66,6 +66,7 @@ services:
          - "8081:8080"
       volumes:
          - ./pokerocket_automation:/mnt/host/pokerocket_automation
+         - ${HOME}/.m2:/root/.m2
       command: bash /mnt/host/pokerocket_automation/entrypoint.sh
 
 

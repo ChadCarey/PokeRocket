@@ -22,3 +22,8 @@ class PokemonService():
     def getPokemon(self, id):
         poke = session.query(Pokemon).get(id)
         return poke
+
+
+    def getPokemonByPokedexId(self, id):
+        poke = session.query(Pokemon).filter_by(pokedexId=id).first()
+        return poke

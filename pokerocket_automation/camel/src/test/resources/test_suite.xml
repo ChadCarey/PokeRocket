@@ -1,6 +1,6 @@
 <suite name="suite">
     <test name="integration">
-<!--        <parameter name="atsUrl" value="http://localhost:8080"/>-->
+<!--        <parameter name="poke" value="http://localhost:8080"/>-->
 <!--        <parameter name="password" value="WRONG PASSWORD"/>-->
 <!--        <groups>-->
 <!--            <run>-->
@@ -10,8 +10,8 @@
         <classes>
 <!--            <class name="com.chad.portfolio.pokerocket.integration.TestPokeRocketEndpoints"/>-->
 <!--            <class name="com.chad.portfolio.pokerocket.camel.TestEndpointFactory"/>-->
-            <!-- <class name="com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.TestPokeApiProxy"/>
-            <class name="com.chad.portfolio.pokerocket.camel.routebuilders.pokeapi.TestPokeApiAdapter"/> -->
+            <!-- <class name="com.chad.portfolio.client.pokeapi.TestPokeApiProxy"/>
+            <class name="com.chad.portfolio.client.pokeapi.TestPokeApiAdapter"/> -->
         </classes>
     </test>
 </suite>

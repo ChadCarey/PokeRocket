@@ -120,6 +120,20 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.chad.portfolio.pokerocket</groupId>
+            <artifactId>pokerocket-beans</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.chad.portfolio.pokerocket</groupId>
+            <artifactId>pokerocket-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

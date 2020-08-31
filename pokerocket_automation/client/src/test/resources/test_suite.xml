@@ -1,0 +1,18 @@
+<suite name="suite">
+    <test name="integration">
+<!--        <parameter name="poke" value="http://localhost:8080"/>-->
+<!--        <parameter name="password" value="WRONG PASSWORD"/>-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="integration" />-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+            <!-- IO -->
+            <class name="com.chad.portfolio.pokerocket.clients.TestPokeApiProxy"/>
+            <class name="com.chad.portfolio.pokerocket.clients.TestPokerocketendpointsProxy"/>
+            <!-- Non IO -->
+            <class name="com.chad.portfolio.pokerocket.clients.TestPokeApiAdapter"/>
+        </classes>
+    </test>
+</suite>
