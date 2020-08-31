@@ -26,17 +26,17 @@ class TestUserEndpoints(unittest.TestCase):
         jdata = res.json()
         self.assertIsNotNone(jdata, jdata)
 
-    # def test_getUser(self):
-    #     url = self.GET_USER_URL.format(id=self.USER_DB_ID)
-    #     res = requests.get(url)
+    def test_getUser(self):
+        url = self.GET_USER_URL.format(id=self.USER_DB_ID)
+        res = requests.get(url)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(res.headers['Content-Type'], "application/json")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/json")
 
-    #     jdata = res.json()
-    #     self.assertIsNotNone(jdata, jdata)
+        jdata = res.json()
+        self.assertIsNotNone(jdata, jdata)
 
-    #     self.assertEqual(jdata.get('id', None), self.NULLIMON_DB_ID)
+        self.assertEqual(jdata.get('id', None), self.NULLIMON_DB_ID)
 
 
    
