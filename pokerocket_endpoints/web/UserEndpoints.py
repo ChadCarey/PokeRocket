@@ -4,7 +4,7 @@ from bl.UserService import UserService
 import json
 from web import PokerocketAdapters
 
-page = Blueprint('page', __name__, template_folder='templates')
+page = Blueprint('user_page', __name__, template_folder='templates')
 userService = UserService()
 
 @page.route('/user', methods=['POST'])

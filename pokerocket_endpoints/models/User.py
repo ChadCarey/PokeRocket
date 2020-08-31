@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from models import Base
 
 class User(Base):
-    __tablename__ = 'pokemon'
+    __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True, nullable=False)
     firstname = Column(String(64), nullable=False)
