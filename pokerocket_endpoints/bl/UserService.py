@@ -18,3 +18,10 @@ class UserService():
     def getUser(self, id):
         user = session.query(User).get(id)
         return user
+
+    def updateUSer(self, updatedUser):
+        if updatedUser.id is None:
+            raise Exception("Cannot update User without User ID")
+        db.session.merge(updatedUser)
+        db.session.flush()
+        db.session.commit()

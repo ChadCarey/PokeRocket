@@ -12,9 +12,18 @@ def addUser():
     jdata = request.get_json()
     user = User(**jdata)
     id = userService.addUser(user)
-    return Response(json.dumps({"id": id}), status=200)
+    return Response(json.dumps(id), status=200, content_type="application/json")
 
 
 @page.route('/user/<path:id>', methods=['GET'])
 def getUser(id):
-    return PokerocketAdapters.as_json(userService.getUser(id))
+    jUser = PokerocketAdapters.as_json(userService.getUser(id))
+    return Response(jUser, status=200, content_type="application/json")
+
+
+@page.route('/user', methods=['PUT'])
+def updateUser():
+    jdata = request.get_json()
+    user = User(**jdata)
+    id = userService.updateUser(user)
+    return Response(id, status=200, content_type="application/json")

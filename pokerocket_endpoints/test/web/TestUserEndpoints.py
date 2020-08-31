@@ -9,6 +9,7 @@ class TestUserEndpoints(unittest.TestCase):
     ADD_USER_URL = SERVER + "/user"
     GET_ALL_USER = SERVER + "/user"
     GET_USER_URL = SERVER + "/user/{id}"
+    
    
 
     def test_addUser(self):
@@ -27,7 +28,17 @@ class TestUserEndpoints(unittest.TestCase):
         self.assertIsNotNone(jdata, jdata)
 
     def test_getUser(self):
-        url = self.GET_USER_URL.format(id=self.USER_DB_ID)
+        newUserDict = {
+            "firstname" : "TestiTrainer",
+            "lastname" : "LastTrainer",
+            "username" : "UserTrainer",
+            "password" : "1234",
+            "role" : 0
+        }
+        res = requests.post(self.ADD_USER_URL, json=newUserDict)
+        self.assertEqual(res.status_code, 200)
+        userID= res.json()
+        url = self.GET_USER_URL.format(id=userID)
         res = requests.get(url)
 
         self.assertEqual(res.status_code, 200)
@@ -36,10 +47,7 @@ class TestUserEndpoints(unittest.TestCase):
         jdata = res.json()
         self.assertIsNotNone(jdata, jdata)
 
-        self.assertEqual(jdata.get('id', None), self.NULLIMON_DB_ID)
-
-
-   
+        self.assertEqual(jdata.get('id', None), userID)
 
 if __name__ == "__main__":
     unittest.main()
