@@ -8,4 +8,8 @@ public class ExchangeMessageAdapters {
 
     private final static Logger log = LoggerFactory.getLogger(ExchangeMessageAdapters.class);
 
+    public Exchange NewPokeSyncFail(Exchange exchange) {
+        return exchange;
+    }
+
 }

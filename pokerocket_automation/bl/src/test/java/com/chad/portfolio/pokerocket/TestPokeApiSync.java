@@ -47,4 +47,5 @@ public class TestPokeApiSync {
         Integer syncedPokemon = pokeApiSync.syncNext();
         Assert.assertTrue(syncedPokemon > 0);
     }
+
 }
