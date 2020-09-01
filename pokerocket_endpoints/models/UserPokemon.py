@@ -21,6 +21,7 @@ class UserPokemon(Base):
     specialDefense = Column(Integer, nullable=False)
     speed = Column(Integer, nullable=False)
     healthState = Column(String(64), nullable=False)
+    estimatedValue = Column(Integer, nullable=False)
 
     # TODO: add last updated
 

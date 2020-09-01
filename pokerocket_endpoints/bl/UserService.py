@@ -19,7 +19,7 @@ class UserService():
         user = session.query(User).get(id)
         return user
 
-    def updateUSer(self, updatedUser):
+    def updateUser(self, updatedUser):
         if updatedUser.id is None:
             raise Exception("Cannot update User without User ID")
         db.session.merge(updatedUser)
