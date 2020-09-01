@@ -4,7 +4,7 @@ from bl.PokemonService import PokemonService
 import json
 from web import PokerocketAdapters
 
-page = Blueprint('page', __name__, template_folder='templates')
+page = Blueprint('pokemon_page', __name__, template_folder='templates')
 pokemonService = PokemonService()
 
 

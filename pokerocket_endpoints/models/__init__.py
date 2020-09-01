@@ -11,6 +11,11 @@ password = os.environ['MYSQL_PASSWORD']
 host = os.environ["MYSQL_HOST"]
 port = os.environ["MYSQL_PORT"]
 database = os.environ['MYSQL_DATABASE']
+print("username", username)
+print("password", password)
+print("host", host)
+print("port", port)
+print("database", database)
 
 dburl = "mysql+pymysql://{username}:{password}@{host}/{database}?host={host}?port={port}".format(
     username=username,
