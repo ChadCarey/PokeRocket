@@ -27,28 +27,26 @@ class TestUserPokemonEndpoints(unittest.TestCase):
         self.assertIsNotNone(jdata, jdata)
 
 
-    # def test_getUserPokemon(self):
-    #     newUserPokemonDict = {
-    #         "firstname" : "TestiTrainer",
-    #         "lastname" : "LastTrainer",
-    #         "userPokemonname" : "UserPokemonTrainer",
-    #         "password" : "1234",
-    #         "role" : 0
-    #     }
-    #     res = requests.post(self.ADD_USER_POKEMON_URL, json=newUserPokemonDict)
-    #     self.assertEqual(res.status_code, 200)
-    #     userPokemonId= res.json()
+    def test_getUserPokemon(self):
+        newUserPokemonDict = {
+            "pokedexId": 45,
+            "userId": 1,
+            "nickname": "StinkBush"
+        }
+        res = requests.post(self.ADD_USER_POKEMON_URL, json=newUserPokemonDict)
+        self.assertEqual(res.status_code, 200)
+        userPokemonId= res.json()
 
-    #     url = self.GET_USER_POKEMON_URL.format(id=userPokemonId)
-    #     res = requests.get(url)
+        url = self.GET_USER_POKEMON_URL.format(id=userPokemonId)
+        res = requests.get(url)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(res.headers['Content-Type'], "application/json")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/json")
 
-    #     jdata = res.json()
-    #     self.assertIsNotNone(jdata, jdata)
+        jdata = res.json()
+        self.assertIsNotNone(jdata, jdata)
 
-    #     self.assertEqual(jdata.get('id', None), userPokemonId)
+        self.assertEqual(jdata.get('id', None), userPokemonId)
 
 
     # def test_updateUserPokemon(self):
