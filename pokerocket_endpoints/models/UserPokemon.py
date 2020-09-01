@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Integer, String, UniqueConstraint
+from sqlalchemy import Column, Integer, String, UniqueConstraint, ForeignKey
 from models import Base
 
 class UserPokemon(Base):
     __tablename__ = 'user_pokemon'
 
     id = Column(Integer, primary_key=True, nullable=False)
-    userId = Column(Integer, primary_key=True, nullable=False)
+    userId = Column(Integer, ForeignKey('user.id'), nullable=False)
     pokedexId = Column(Integer, nullable=False, unique=True)
     name = Column(String(64), nullable=False)
     nickname =Column(String(64), nullable=False)

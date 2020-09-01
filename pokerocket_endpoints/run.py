@@ -1,6 +1,7 @@
 from flask import Flask
 from web import PokemonEndpoints
 from web import UserEndpoints
+from web import UserPokemonEndpoints
 import werkzeug
 from werkzeug.exceptions import HTTPException, BadRequest, InternalServerError
 import json
@@ -9,6 +10,7 @@ app = Flask(__name__)
 
 app.register_blueprint(PokemonEndpoints.page)
 app.register_blueprint(UserEndpoints.page)
+app.register_blueprint(UserPokemonEndpoints.page)
 
 
 

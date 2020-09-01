@@ -1,0 +1,4 @@
+
+
+MAX_HUNGER = 100
+ALIVE_POKEMON_STATE = "alive"
