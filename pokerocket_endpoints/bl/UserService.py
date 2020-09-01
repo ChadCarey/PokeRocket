@@ -1,7 +1,7 @@
 from models import session
 from models.User import User
 from random import randint
-
+from web import PokerocketAdapters as adapters
 
 class UserService():
 
@@ -19,9 +19,22 @@ class UserService():
         user = session.query(User).get(id)
         return user
 
-    def updateUser(self, updatedUser):
-        if updatedUser.id is None:
+    def updateUser(self, updatedUserDict):
+        mergedUser = None
+        userId = updatedUserDict.pop('id')
+        if userId is None:
             raise Exception("Cannot update User without User ID")
-        db.session.merge(updatedUser)
-        db.session.flush()
-        db.session.commit()
+        try:
+
+            fromDbUserDict = adapters.as_dict( self.getUser( userId ) )
+            fromDbUserDict.update(updatedUserDict)
+            print(fromDbUserDict)
+
+            session.query(User).filter(User.id == userId).update( fromDbUserDict, synchronize_session= False )
+            session.commit()
+
+            mergedUser = self.getUser( userId )
+        except Exception as e:
+            session.rollback()
+            raise e
+        return mergedUser
