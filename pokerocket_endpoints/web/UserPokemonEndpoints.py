@@ -20,7 +20,7 @@ def getUserPokemon(id):
     return Response(jUserPokemon, status=200, content_type="application/json")
 
 
-@page.route('/user/pokemon', methods=['PUT'])
+@page.route('/user/pokemon/update', methods=['PUT'])
 def updateUserPokemon():
     updateDict = request.get_json()
     updatedUserPokemon = userPokemonService.updateUserPokemon(updateDict)

@@ -7,7 +7,7 @@ class TestUserPokemonEndpoints(unittest.TestCase):
 
     SERVER = "http://localhost:5000"
     ADD_USER_POKEMON_URL = SERVER + "/user/pokemon/add"
-    UPDATE_USER_POKEMON_URL = SERVER + "/user/pokemon"
+    UPDATE_USER_POKEMON_URL = SERVER + "/user/pokemon/update"
     GET_ALL_USER_POKEMON = SERVER + "/user/pokemon"
     GET_USER_POKEMON_URL = SERVER + "/user/pokemon/{id}"
 
@@ -49,36 +49,34 @@ class TestUserPokemonEndpoints(unittest.TestCase):
         self.assertEqual(jdata.get('id', None), userPokemonId)
 
 
-    # def test_updateUserPokemon(self):
-    #     PRIOR_ROLE = 0
-    #     EXPECTED_ROLE = 1
-    #     newUserPokemonDict = {
-    #         "firstname" : "TestiTrainer",
-    #         "lastname" : "LastTrainer",
-    #         "userPokemonname" : "UserPokemonTrainer",
-    #         "password" : "1234",
-    #         "role" : PRIOR_ROLE
-    #     }
-    #     res = requests.post(self.ADD_USER_POKEMON_URL, json=newUserPokemonDict)
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(res.headers['Content-Type'], "application/json")
+    def test_updateUserPokemon(self):
+        PRIOR_ROLE = 0
+        EXPECTED_CHANGE_NICKNAME = "MamaCat"
+        newUserPokemonDict = {
+            "pokedexId": 38,
+            "userId": 2,
+            "nickname": "Firefox"
+        }
+        res = requests.post(self.ADD_USER_POKEMON_URL, json=newUserPokemonDict)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/json")
 
-    #     jdata = res.json()
-    #     self.assertIsNotNone(jdata, jdata)
-    #     self.assertTrue(isinstance(jdata, int))
+        jdata = res.json()
+        self.assertIsNotNone(jdata, jdata)
+        self.assertTrue(isinstance(jdata, int))
 
-    #     # updated recently added userPokemon
-    #     newUserPokemonDict['id'] = jdata
-    #     newUserPokemonDict['role'] = EXPECTED_ROLE
-    #     res = requests.put(self.ADD_USER_POKEMON_URL, json=newUserPokemonDict)
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(res.headers['Content-Type'], "application/json")
+        # updated recently added userPokemon
+        newUserPokemonDict['id'] = jdata
+        newUserPokemonDict['nickname'] = EXPECTED_CHANGE_NICKNAME
+        res = requests.put(self.UPDATE_USER_POKEMON_URL, json=newUserPokemonDict)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/json")
 
-    #     updatedUserPokemon = res.json()
-    #     self.assertIsNotNone(updatedUserPokemon, updatedUserPokemon)
-    #     self.assertTrue(isinstance(updatedUserPokemon, dict))
+        updatedUserPokemon = res.json()
+        self.assertIsNotNone(updatedUserPokemon, updatedUserPokemon)
+        self.assertTrue(isinstance(updatedUserPokemon, dict))
 
-    #     self.assertEqual(updatedUserPokemon.get('role', None), EXPECTED_ROLE)
+        self.assertEqual(updatedUserPokemon.get('nickname', None), EXPECTED_CHANGE_NICKNAME)
 
 
 if __name__ == "__main__":
