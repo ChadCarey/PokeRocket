@@ -33,6 +33,8 @@ services:
          rocketnet:
       environment:
          - MYSQL_DATABASE=pokerocketdb
+         - CAP_SYS_NICE
+         - SYS_NICE
       volumes:
          - ./pokerocket_db:/mnt/host/pokerocket_db
       command: --default-authentication-plugin=mysql_native_password

@@ -23,7 +23,7 @@ def getUser(id):
 
 @page.route('/user', methods=['PUT'])
 def updateUser():
-    jdata = request.get_json()
-    user = User(**jdata)
-    id = userService.updateUser(user)
-    return Response(id, status=200, content_type="application/json")
+    updateDict = request.get_json()
+    updatedUser = userService.updateUser(updateDict)
+    jUser = PokerocketAdapters.as_json(updatedUser)
+    return Response(jUser, status=200, content_type="application/json")
